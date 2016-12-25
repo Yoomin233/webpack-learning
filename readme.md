@@ -60,6 +60,7 @@ from https://github.com/ruanyf/webpack-demos
   - in `main.js`, `require('./app.css')`
   - different loaders are chained by exclamation mark(!), like `loader: 'style-loader!css-loader'`. 
   - the css file will be inserted inside `head` tag in the form of inline-style sheets. 
+  - two loaders are needed: `css-loader` to read css file, and `style-loader` to insert style tag into html page. 
   - ```javascript
   module: {
     loaders:[
@@ -68,4 +69,57 @@ from https://github.com/ruanyf/webpack-demos
   }
   ```
 
-###
+## demo05 image loader
+  - `url-loaders` transforms image files. 
+  - `?` is used to pass parameters into loaders. 
+  - require: `img1.src = require("./small.png");`
+  - loader: 
+  ```javascript
+  module: {
+    loaders:[
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
+    ]
+  }
+  ```
+
+## demo06 css module
+  - ```javascript
+  {
+    test: /\.css$/,
+    loader: 'style-loader!css-loader?modules'
+  }
+  ```
+  - 类似vue-loader里面的`scoped css`
+
+## demo07 uglifyJs plugin
+  - minify and uglify the js file
+  - ```javascript
+  var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+  plugins: [
+    new uglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ]
+  ```
+
+## demo08 html webpack plugin and open browser webpack plugin
+  - `html webpack plugin` creates a html file for you, and `open browser webpack plugin` opens a browser tab served from localhost. 
+
+##demo09 env tags
+  - enabled through 
+  ```javascript
+  var devFlagPlugin = new webpack.DefinePlugin({
+    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+  });
+  ```
+  - then use this `ENV` variable in js file
+  ```javascript
+  if (__ENV__) {
+    // do something dev...
+  }
+  ```
+
+# demo10 code splitting
+  - split codes into several chunks. 
