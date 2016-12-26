@@ -107,7 +107,7 @@ from https://github.com/ruanyf/webpack-demos
 ## demo08 html webpack plugin and open browser webpack plugin
   - `html webpack plugin` creates a html file for you, and `open browser webpack plugin` opens a browser tab served from localhost. 
 
-##demo09 env tags
+## demo09 env tags
   - enabled through 
   ```javascript
   var devFlagPlugin = new webpack.DefinePlugin({
@@ -121,5 +121,52 @@ from https://github.com/ruanyf/webpack-demos
   }
   ```
 
-# demo10 code splitting
-  - split codes into several chunks. 
+## demo10 code splitting
+  - split codes into several chunks. load on demand. 
+  - use `require.ensure`. 
+  - packs more than one js file. load other js files and their dependences on demand. 
+
+## demo11 code splitting using bundle-loader
+  - using `bundle-loader` plug-in to split code into chunks. 
+
+## demo12 common chunk
+  - 
+
+## demo13 vendor chunk
+  - extract the vendor libararies from a script into a separate file. 
+  - ```javascript
+  var webpack = require('webpack');
+
+  module.exports = {
+    entry: {
+      app: './main.js',
+      vendor: ['jquery'],
+    },
+    output: {
+      filename: 'bundle.js'
+    },
+    plugins: [
+      new webpack.optimize.CommonsChunkPlugin(/* chunkName= */'vendor', /* filename= */'vendor.js')
+    ]
+  };
+  ```
+  - making module variable available in every module by using `ProvidePlugin`. 
+  - ```javascript
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    })
+  ]
+  ```
+
+## demo14 exposing global variables
+  - use some global variables
+
+## demo15 hot module replacement
+  - enable through webpack-dev-server: `webpack-dev-server --hot--inline`. `--hot` adds the HotModuleReplacementPlugin and switch the server to hot mode, `--inline` embed the webpack-dev-server runtime into the bundle. 
+  - enable through modify `webpack.config.js`. 
+
+## demo16 react router
+  - 
